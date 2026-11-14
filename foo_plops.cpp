@@ -74,7 +74,14 @@ static void execute_operation(operation_t operation, const GUID & target_guid,
 
     metadb_handle_list items;
     api->playlist_get_items(source, items, selection);
-    if (items.get_count() != data.get_count()) {
+    // Equal counts do not make the same selection: a shortcut can fire elsewhere.
+    metadb_handle_list expected;
+    expected.add_items(data);
+    expected.sort_by_pointer();
+    bool same_selection = items.get_count() == data.get_count();
+    for (t_size index = 0; same_selection && index < items.get_count(); ++index)
+        same_selection = expected.bsearch_by_pointer(items[index]) != SIZE_MAX;
+    if (!same_selection) {
         report_error("The playlist selection changed before the command ran.");
         return;
     }
