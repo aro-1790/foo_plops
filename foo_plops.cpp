@@ -7,7 +7,7 @@
 #include <vector>
 
 // Stamped by ./version.sh from resource/version.txt - do not edit by hand.
-DECLARE_COMPONENT_VERSION("Playlist Operations", "0.1.0",
+DECLARE_COMPONENT_VERSION("Playlist Operations", "0.1.1",
     "Playlist operations for foobar2000.\n"
     "Adds Add to..., Move to..., and Remove from all playlists... to the track context menu, plus a command that jumps to the top of the active playlist.\n"
     "\n"
